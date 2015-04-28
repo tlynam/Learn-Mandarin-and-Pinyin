@@ -1,0 +1,28 @@
+<%= form_for @phrase, :html => {:class => "form-horizontal"} do |f| %>
+  <% if @phrase.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <ul>
+      <% @phrase.errors.full_messages.each do |message| %>
+        <h3><li><%= message %></li><h3>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <%= f.label :english, class: "col-sm-2 control-label" %>
+    <div class="col-md-8 col-sm-8 col-xs-8">
+      <%= f.text_field :english, class: "form-control", :autofocus => true %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :pinyin, class: "col-sm-2 control-label" %>
+    <div class="col-md-8 col-sm-8 col-xs-8">
+      <%= f.text_field :pinyin, class: "form-control", :autofocus => true %>
+    </div>
+  </div>
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>

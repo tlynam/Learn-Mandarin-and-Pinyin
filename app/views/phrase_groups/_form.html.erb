@@ -1,0 +1,29 @@
+<%= form_for @phrase_group, :html => {:class => "form-horizontal"} do |f| %>
+  <% if @phrase_group.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <ul>
+      <% @phrase_group.errors.full_messages.each do |message| %>
+        <h3><li><%= message %></li><h3>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-md-5 col-sm-5 col-xs-5">
+      <%= f.text_field :name, class: "form-control", :autofocus => true %>
+    </div>
+  </div>
+  <%= f.fields_for :phrases do |phrase_form| %>
+      <div class="field form-group">
+        <%= phrase_form.label :english, 'Phrases', class: "col-sm-2 control-label" %>
+        <%#= phrase_form.select :english, @phrases.map{|p| [p.english, "#{p.id}"] }, class: "form-control" %>
+        <%= collection_check_boxes :name, @phrases.map{|p| p.id}, @phrases, :id, :english %>
+      </div>
+  <% end %>
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>

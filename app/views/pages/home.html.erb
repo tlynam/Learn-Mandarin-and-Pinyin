@@ -1,0 +1,99 @@
+<h1>Phrases</h1>
+
+<%= link_to "Add a Phrase", new_phrase_path %>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>English</th>
+			<th>Pinyin</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @phrases.each do |phrase| %>
+			<tr>
+				<td><%= phrase.english %></td>
+				<td><%= phrase.pinyin %></td>
+				<td>
+					<%= link_to edit_phrase_path(phrase) do %>
+						<span class="glyphicon glyphicon-edit"></span>
+					<% end %>
+					<%= link_to phrase_path(phrase), method: :delete do %>
+						<span class="glyphicon glyphicon-trash"></span>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+<h1>Phrase Groups</h1>
+
+<%= link_to "Add a Phrase Group", new_phrase_group_path %>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Grouping</th>
+			<th>Phrases</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @phrase_groups.each do |phrase_group| %>
+			<tr>
+				<td><%= phrase_group.name %></td>
+				<td>
+					<%= phrase_group.phrases.map {|p| p.english}.to_sentence %>
+				</td>
+				<td>
+					<%= link_to edit_phrase_group_path(phrase_group) do %>
+						<span class="glyphicon glyphicon-edit"></span>
+					<% end %>
+					<%= link_to phrase_group_path(phrase_group), method: :delete do %>
+						<span class="glyphicon glyphicon-trash"></span>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h1>Sentences</h1>
+
+<%= link_to "Add a Sentence", new_sentence_path %>
+
+<% if false %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Sentence</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @sentences.each do |sentence| %>
+				<tr>
+					<td><%= sentence.english %></td>
+					<td>
+						<% sentence.phrases.each do |phrase| %>
+							<%= phrase.english %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to edit_sentence_path(sentence) do %>
+  						<span class="glyphicon glyphicon-edit"></span>
+						<% end %>
+						<%= link_to sentence_path(sentence), method: :delete do %>
+  						<span class="glyphicon glyphicon-trash"></span>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
